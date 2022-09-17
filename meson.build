@@ -3,7 +3,13 @@ project('contact-manager', 'cpp',
   default_options : ['warning_level=3',
                      'cpp_std=c++14'])
 
-exe = executable('contact_manager', 'contact_manager.cpp',
+project_source_files = [
+  'contact_manager.cpp',
+  'Contact.cpp',
+  'ContactListManager.cpp'
+]
+
+exe = executable('contact_manager', project_source_files,
   install : true)
 
 test('basic', exe)
