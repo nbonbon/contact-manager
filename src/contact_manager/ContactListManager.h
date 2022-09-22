@@ -15,6 +15,7 @@ class ContactListManager
         void SetList(std::vector<Contact> list);
         std::vector<Contact> GetList();
         void AddContact(Contact contact);
+        bool DeleteContactByName(std::string name);
 };
 
 #endif

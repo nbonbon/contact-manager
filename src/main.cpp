@@ -14,6 +14,7 @@ void usage()
               << "Options:\n"
               << "\t-?\t\tShow this usage message\n"
               << "\t-a,--add\t\tAdd a contact\n"
+              << "\t-d,--delete\t\tDelete a contact\n"
               << "\t-h,--help\t\tShow this usage message\n"
               << "\t-i,--interactive\t\tEnter interactive mode\n"
               << "\t-l,--list\t\tList all contacts\n"
@@ -64,7 +65,17 @@ void addContact()
 
 void deleteContact()
 {
-    //todo
+    std::string name;
+    std::cout << "Contact Name to delete: ";
+    std::cin >> name;
+    if (contactListManager.DeleteContactByName("name"))
+    {
+       std::cout << name << " deleted!"; 
+    }
+    else
+    {
+        std::cout << name << "does not exist.";
+    }
 }
 
 void interactiveMode()
@@ -75,6 +86,7 @@ void interactiveMode()
         std::cout << "\n##########################################\n"
             << "What would you like to do:\n"
             << "\ta\t-\tAdd a contact\n"
+            << "\td\t-\tDelete a contact\n"
             << "\tl\t-\tList all contacts\n"
             << "\tq\t-\tQuit\n"
             << "##########################################"
@@ -88,6 +100,10 @@ void interactiveMode()
         else if (response == "a")
         {
             addContact();
+        }
+        else if (response == "d")
+        {
+            deleteContact();
         }
         else if (response == "l")
         {
@@ -121,6 +137,10 @@ int main(int argc, char **argv)
         else if(std::string(argv[i]) == "-a" || std::string(argv[i]) == "--add")
         {
             addContact();
+        }
+        else if(std::string(argv[i]) == "-d" || std::string(argv[i]) == "--delete")
+        {
+            deleteContact();
         }
         else if(std::string(argv[i]) == "-i" || std::string(argv[i]) == "--interactive")
         {

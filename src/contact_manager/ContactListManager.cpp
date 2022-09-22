@@ -1,3 +1,4 @@
+#include <iterator>
 #include "ContactListManager.h"
 
 ContactListManager::ContactListManager() { }
@@ -20,4 +21,21 @@ void ContactListManager::SetList(std::vector<Contact> list)
 void ContactListManager::AddContact(Contact contact)
 {
     this->list.push_back(contact);
+}
+
+bool ContactListManager::DeleteContactByName(std::string name)
+{
+    for (auto iter = this->list.begin(); iter < this->list.end(); iter++)
+    {
+        if ((*iter).GetName() == name)
+        {
+            if(this->list.erase(iter) == this->list.end())
+            {
+                return false;
+            }
+            break;
+        }
+    }
+    
+    return true;
 }
