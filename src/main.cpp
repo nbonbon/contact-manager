@@ -46,7 +46,7 @@ void listContacts()
               << std::endl;
     }
 
-        std::cerr 
+    std::cerr 
         << "##########################################\n"
         << std::endl;
 }
@@ -68,7 +68,7 @@ void deleteContact()
     std::string name;
     std::cout << "Contact Name to delete: ";
     std::cin >> name;
-    if (contactListManager.DeleteContactByName("name"))
+    if (contactListManager.DeleteContactByName(name))
     {
        std::cout << name << " deleted!"; 
     }

@@ -29,13 +29,10 @@ bool ContactListManager::DeleteContactByName(std::string name)
     {
         if ((*iter).GetName() == name)
         {
-            if(this->list.erase(iter) == this->list.end())
-            {
-                return false;
-            }
-            break;
+            this->list.erase(iter);
+            return true;
         }
     }
     
-    return true;
+    return false;
 }
