@@ -24,10 +24,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - uses: BSFishy/meson-build@v1.0.3
+      - name: Build
+        uses: BSFishy/meson-build@v1.0.3
         with:
           action: build
-      - uses: BSFishy/meson-build@v1.0.3
+      - name: Run Unit Tests
+        uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
       - name: Publish Test Results
