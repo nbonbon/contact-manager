@@ -36,4 +36,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          junit_files: "$GITHUB_WORKSPACE/build/meson-logs/testlog.junit.xml"
+          junit_files: ./**/build/meson-logs/*.junit.xml
