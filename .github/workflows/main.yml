@@ -34,4 +34,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          junit_files: "contact-manager/build/meson-logs/**/*.xml"
+          junit_files: "build/meson-logs/*.xml"
