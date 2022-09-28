@@ -19,6 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      GTEST_OUTPUT: xml:/${{ github.workspace }}/test-artifacts
     permissions:
       checks: write
       pull-requests: write
@@ -37,7 +39,7 @@ jobs:
         uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
-      - run: ls  ${{ github.workspace }}/build/meson-logs/
+      - run: ls  $GTEST_OUTPUT
       - uses: actions/upload-artifact@v3
         with:
           name: test-results
