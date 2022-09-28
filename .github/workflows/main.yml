@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - run: echo "!!!!${{ github.workspace }}!!!"
+      - run: echo "Github Workspace - ${{ github.workspace }}"
       - name: Build
         uses: BSFishy/meson-build@v1.0.3
         with:
@@ -37,6 +37,7 @@ jobs:
         uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
+      - run: ls  ${{ github.workspace }}/build/meson-logs/
       - uses: actions/upload-artifact@v3
         with:
           name: test-results
