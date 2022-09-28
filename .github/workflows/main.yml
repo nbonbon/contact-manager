@@ -19,8 +19,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      GTEST_OUTPUT: xml:${{ github.workspace }}/test-artifacts/junit.xml
     permissions:
       checks: write
       pull-requests: write
@@ -30,7 +28,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - run: echo "Github Workspace - ${{ github.workspace }}"
       - name: Build
         uses: BSFishy/meson-build@v1.0.3
         with:
@@ -39,13 +36,16 @@ jobs:
         uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
-      - run: ls  $GTEST_OUTPUT
       - uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: build/meson-logs/*
+          path: ${{ github.workspace }}/build/meson-logs/*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: binary
+          path: ${{ github.workspace }}/build/contact-manager
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: ./**/build/meson-logs/*.junit.xml
+          JUNIT_FILES: ${{ github.workspace }}/build/meson-logs/*.junit.xml
