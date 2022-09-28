@@ -36,7 +36,6 @@ jobs:
         uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
-          setup-options: -D--gtest_output=xml
       - uses: actions/upload-artifact@v3
         with:
           name: test-results
