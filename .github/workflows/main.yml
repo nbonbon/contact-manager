@@ -19,14 +19,33 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      actions: read
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - uses: BSFishy/meson-build@v1.0.3
+      - name: Build
+        uses: BSFishy/meson-build@v1.0.3
         with:
           action: build
-      - uses: BSFishy/meson-build@v1.0.3
+      - name: Run Unit Tests
+        uses: BSFishy/meson-build@v1.0.3
         with:
           action: test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ${{ github.workspace }}/build/meson-logs/*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: binary
+          path: ${{ github.workspace }}/build/contact_manager_exe
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          JUNIT_FILES: ${{ github.workspace }}/build/meson-logs/*.junit.xml
