@@ -43,7 +43,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: binary
-          path: ${{ github.workspace }}/build/contact-manager
+          path: ${{ github.workspace }}/build/contact_manager_exe
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
